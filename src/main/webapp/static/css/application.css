@@ -1,0 +1,200 @@
+html {
+	font-family: Arial;
+	font-size: 16px;
+	margin: 20px;
+}
+
+h1 {
+	font-size: 22px;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+td, th {
+	border: solid black 1px;
+	padding: 5px;
+}
+
+a {
+	color: darkslateblue;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+label {
+	font-weight: bold;
+}
+
+ul {
+	list-style-type: none;
+}
+
+ul > li:before {
+	content: "-";
+	position: absolute;
+	margin-left: -1.1em;
+}
+
+form {
+	width: 500px;
+	position: relative;
+}
+
+form label {
+	display: inline-block;
+	width: 150px;
+	text-alignr: right;
+	margin: 10px;
+}
+
+select, input[type='text'] {
+	display: inline-block;
+	border-radius: 3px;
+	border: solid black 1px;
+	padding: 4px;
+}
+
+select {
+	width: 210px;
+	margin: 10px 0px 10px 10px;
+
+}
+
+input[type='text'] {
+	display: inline-block;
+	width: 200px;
+	margin: 10px;
+	border-radius: 3px;
+	border: solid black 1px;
+	padding: 4px;
+}
+
+button {
+	border: 0;
+	background: none;
+	box-shadow:none;
+	border-radius: 5px;
+	margin-top: 20px;
+	margin-left: 10px;
+	padding: 5px;
+	border: solid black 2px;
+	font-weight: bold;
+	font-size: 16px;
+	width: 120px;
+}
+
+button[type='submit'] {
+	position: absolute;
+	right: 10px;
+}
+
+button:hover {
+	background-color: black;
+	color: white;
+}
+
+.success, .succes {
+	font-weight: bold;
+	color: green;
+	border-radius: 5px;
+	border: solid green 2px;
+	display: inline-block;
+	padding: 10px;
+	background-color: lightgreen;
+}
+
+.error, .erreur {
+	font-weight: bold;
+	color: red;
+	border-radius: 5px;
+	border: solid red 2px;
+	display: inline-block;
+	padding: 10px;
+	background-color: lightpink;
+}
+
+#cocktails {
+	display: table-row;
+}
+
+#bloc-recherche {
+	position: relative;
+	display: table-cell;
+}
+
+#bloc-commande {
+	display: table-cell;
+	text-align: right;
+	width: 200px;
+}
+
+#bloc-commande #commande {
+	text-align: left;
+	width: 230px;
+}
+
+#bloc-commande #commande li {
+	cursor: pointer;
+}
+
+#bloc-recherche #suggestions {
+	width: 208px;
+	position: absolute;
+	border: solid black 1px;
+	top: 23px;
+	left: 10px;
+	padding: 0;
+	background-color: white;
+}
+
+#bloc-recherche #suggestions > li {
+	padding: 5px;
+}
+
+#bloc-commande #commande > li.hidden,
+#bloc-recherche #suggestions > li.hidden {
+	display: none;
+}
+
+#bloc-recherche #suggestions > li:hover {
+	background-color: lightblue;
+	cursor: default;
+}
+
+#bloc-recherche #suggestions > li:before {
+	content: '';
+}
+
+#prix {
+	font-weight: bold;
+	font-size: 20px;
+}
+
+#header {
+	display: table-row;
+}
+
+#header img {
+	width: 150px;
+	height: auto;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#header h1 {
+	display: table-cell;
+	padding-left: 20px;
+	font-family: cursive;
+	vertical-align: middle;
+	font-size: 30px;
+	color: #dd5566;
+}
+
+#footer {
+	margin-top: 30px;
+}
