@@ -37,7 +37,7 @@ spring.mvc.view.suffix=.jsp
 
 > fr.insee.springmvc.controller
 
-### Créer le contrôleur `AccueilController`
+### Créer le contrôleur
 
 > AccueilController.java
 
@@ -73,13 +73,13 @@ Paramétrer le message avec cet attribut.
 
 Tester.
 
-### Rediriger l’URL racine vers la page d’accueil
+### Afficher la page d’accueil lorsque l’url racine est appelée
 
 > AccueilController.java
 
 Faire en sorte que l’URL racine `/` retourne également la page d’accueil.
 
-Tester en avec l’URL `http://localhost:8080``dans le navigateur.
+Tester en avec l’URL `http://localhost:8080` dans le navigateur.
 
 
 
