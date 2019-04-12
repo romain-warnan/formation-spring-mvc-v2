@@ -42,7 +42,7 @@ spring.mvc.view.suffix=.jsp
 > AccueilController.java
 
 Ajouter l’annotation `@Controller`.
-Créer une méthode qui retourne la vue `/WEB-INF/views/accueil.jsp` quand on accède à l’URL `/accueil`.
+Créer une méthode qui retourne la vue `accueil` quand on accède à l’URL `/accueil`.
 Cette méthode ajoute au modèle un objet `message` de type qui vaut `"Hello world"`.
 
 ### Créer une JSP qui affiche le message
@@ -70,6 +70,7 @@ welcome.message=Spring MVC
 
 Ajouter un attribute de type `String` dans le contrôleur et l’annoter avec `@Value("${welcome.message}")` pour récupérer la valeur de la clé `welcome.message`.
 Paramétrer le message avec cet attribut.
+
 Tester.
 
 ### Rediriger l’URL racine vers la page d’accueil
@@ -78,7 +79,7 @@ Tester.
 
 Faire en sorte que l’URL racine `/` retourne également la page d’accueil.
 
-
+Tester en avec l’URL `http://localhost:8080``dans le navigateur.
 
 
 
