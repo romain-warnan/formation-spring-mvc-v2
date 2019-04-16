@@ -1,29 +1,22 @@
-HELP.md
-/target/
-!.mvn/wrapper/maven-wrapper.jar
+target/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+.settings/
+.idea/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
 *.iml
-*.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-/build/
+.classpath
+.project
+.git-credentials
+.*-credentials
 
-### VS Code ###
-.vscode/
+node_modules/
+docs/test/
+docs/*.yml
+docs/bower.json
+docs/CONTRIBUTING.md
+docs/demo.html
+docs/Gruntfile.js
+docs/LICENSE
+docs/package.json
+docs/README.md
