@@ -24,6 +24,10 @@ git clone https://github.com/romain-warnan/formation-spring-mvc.git
 
 ## 1. Mise en place
 
+```bash
+git checkout -b tp1 origin/tp1
+```
+
 ### Configurer le chemin d’accès aux pages
 
 > application.properties
