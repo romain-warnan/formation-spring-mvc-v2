@@ -178,7 +178,7 @@ Il faut enregistrer le nouveau convertisseur
 
 ```xml
 <mvc:annotation-driven conversion-service="conversionService" />
-<bean id="conversionService" 
+<bean id="conversionService"
     class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
     <property name="converters">
     <set>
@@ -236,7 +236,7 @@ public class UtilisateurResolver implements HandlerMethodArgumentResolver {
     public boolean supportsParameter(MethodParameter parameter) {
         return Utilisateur.class.equals(parameter.getParameterType());
     }
-    
+
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
         NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {

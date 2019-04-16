@@ -112,7 +112,7 @@ prefix.key.b=Valeur B
 ```
 
 ```xml
-<context:property-placeholder location="file://${catalina.base}/webapps/*.properties" 
+<context:property-placeholder location="file://${catalina.base}/webapps/*.properties"
 	file-encoding="UTF-8"
 	ignore-resource-not-found="true"
 	ignore-unresolvable="true"

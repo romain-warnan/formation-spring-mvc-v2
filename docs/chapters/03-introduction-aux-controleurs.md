@@ -171,16 +171,16 @@ http://serveur/accueil<span style="color:red">?nom=Valeur</span>
 public class AccueilController {
 
      @Autowired
-     private MessageService messageService; 
+     private MessageService messageService;
 
      @RequestMapping("/accueil")
-     public String accueil(@RequestParam("nom") String nom, Model model) { 
+     public String accueil(@RequestParam("nom") String nom, Model model) {
           model.addAttribute("message", messageService.message(nom));
           return "accueil";
      }
 }
 ```
-Spring récupère la valeur du paramètre « nom » 
+Spring récupère la valeur du paramètre « nom »
  - dans l’URL
  - et l’injecte dans la méthode de contrôleur
 
@@ -202,7 +202,7 @@ public class AccueilController {
      private PersonneService personneService;
 
      @RequestMapping("/personne/{id}")
-     public String accueil(@PathVariable("id") Long id, Model model) { 
+     public String accueil(@PathVariable("id") Long id, Model model) {
           model.addAttribute("personne", personneService.personne(id));
           return "personne";
      }
@@ -217,4 +217,4 @@ Il peut y avoir plusieurs `PathVariable`
 
 
 <!-- .slide: data-background-image="images/tp.png" data-background-size="500px" class="tp" -->
-## [TP1](https://github.com/romain-warnan/formation-spring-mvc#0-récupérer-le-code-source-du-tp) 
+## [TP1](https://github.com/romain-warnan/formation-spring-mvc#0-récupérer-le-code-source-du-tp)

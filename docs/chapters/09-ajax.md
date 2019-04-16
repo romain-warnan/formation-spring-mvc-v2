@@ -38,7 +38,7 @@ La conversion JAVA &hArr; JSON est automatique
  - il suffit qu’il existe une librairie capable de la réaliser dans le classpath
  - Jackson par exemple
 
-Renvoyer un objet dans le corps de la réponse 
+Renvoyer un objet dans le corps de la réponse
  - &ne; vers une JSP comme d’habitude
  - `@ResponseBody`
 
@@ -59,14 +59,14 @@ public class Personne {
     private String nom;
     private Integer age;
     private Adresse adresse;
-    
+
     // Getters et Setters
 }
 
 public class Adresse {
     private String voie;
     private List<String> complement;
-    
+
     // Getters et Setters
 }
 ```
@@ -149,7 +149,7 @@ $.ajax({
     contentType : 'application/json; charset=utf-8',
     data: JSON.stringify(request)
 }).done(function(response) {
-    …  
+    …
 });
 ```
 

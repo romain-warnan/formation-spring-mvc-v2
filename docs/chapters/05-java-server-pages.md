@@ -77,7 +77,7 @@ StringUtils.isNotEmpty(personne.getNom())
 
 (vide)
 ```
- 
+
 ```html
 <c:url var="url" value="/accueil" />
 <a href="${url}">Lien</a>
@@ -85,13 +85,13 @@ StringUtils.isNotEmpty(personne.getNom())
 
 <a href="contextPath/accueil">Lien</a>
 ```
- 
+
 ```html
 <c:out value="${personne.nom}" />
 
 Nom
 ```
- 
+
 ```html
 <c:out value="${personne.nom}" default="Inconnu" />
 
@@ -141,7 +141,7 @@ Bonjour Monsieur / Bonjour Madame / Bonjour
 
 
 <!-- .slide: class="slide" -->
-### Formattage et internationalisation (i18n) 
+### Formattage et internationalisation (i18n)
 JSTL : JSP Standard Tag Library
 ```html
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -159,7 +159,7 @@ Hello / ???a.b.bonjour???
 ```html
 <fmt:formatNumber value="${1234.5}" minIntegerDigits="1" minFractionDigits="2" />
 
-1 234,50 
+1 234,50
 1,234.50
 ```
 

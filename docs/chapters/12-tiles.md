@@ -60,7 +60,7 @@ Définition du nouveau `viewResolver`
 </bean>
 ```
 
-Le fichier `tiles.xml` contient la description de la structure des pages. 
+Le fichier `tiles.xml` contient la description de la structure des pages.
 
 
 
@@ -70,25 +70,25 @@ Le fichier `tiles.xml` contient la description de la structure des pages.
 ### Définitions des Tiles
 
 ```xml
-<tiles-definitions>  
-   <definition name="default-layout" template="/WEB-INF/views/tiles/layout/defaultLayout.jsp">  
-       <put-attribute name="title" value="" />  
-       <put-attribute name="menu" value="/WEB-INF/views/tiles/template/defaultMenu.jsp" />  
-       <put-attribute name="content" value="" />  
-       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />  
-   </definition>  
-  
+<tiles-definitions>
+   <definition name="default-layout" template="/WEB-INF/views/tiles/layout/defaultLayout.jsp">
+       <put-attribute name="title" value="" />
+       <put-attribute name="menu" value="/WEB-INF/views/tiles/template/defaultMenu.jsp" />
+       <put-attribute name="content" value="" />
+       <put-attribute name="footer" value="/WEB-INF/views/tiles/template/defaultFooter.jsp" />
+   </definition>
+
    <!-- Page d’accueil -->
-   <definition name="accueil" extends="default-layout">  
-       <put-attribute name="title" value="Accueil" />  
-       <put-attribute name="content" value="/WEB-INF/views/pages/accueil.jsp" />  
-   </definition>  
-       
+   <definition name="accueil" extends="default-layout">
+       <put-attribute name="title" value="Accueil" />
+       <put-attribute name="content" value="/WEB-INF/views/pages/accueil.jsp" />
+   </definition>
+
    <!-- Page nous contacter -->
-   <definition name="nous-contacter" extends="default-layout">  
-       <put-attribute name="title" value="Nous contacter" />  
-       <put-attribute name="content" value="/WEB-INF/views/pages/nous-contacter.jsp" />  
-   </definition>  
+   <definition name="nous-contacter" extends="default-layout">
+       <put-attribute name="title" value="Nous contacter" />
+       <put-attribute name="content" value="/WEB-INF/views/pages/nous-contacter.jsp" />
+   </definition>
 </tiles-definitions>
 ```
 
@@ -118,7 +118,7 @@ Les pages héritent d’une structure de base
 <body>
     <header id="header">
         <tiles:insertAttribute name="header" />
-    </header> 
+    </header>
     <header id="menu">
         <tiles:insertAttribute name="menu" />
     </header>
@@ -162,7 +162,7 @@ Il y a correspondance entre les balises `<put-attribute>` de tiles.xml et les in
 ```
 
 Les pages JSP ne contiennent que le code qui est différent des autres pages
- 
+
 Le code de présentation est découpé en parties homogènes
 
 

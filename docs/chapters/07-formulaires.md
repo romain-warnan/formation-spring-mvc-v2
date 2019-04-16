@@ -44,7 +44,7 @@ Dans le contrôleur, ajouter l’objet au modèle
   - en cas de création par exemple
   - ici, `model.addAttribute("personne", new Personne());`
  - Sinon, les propriétés de l’objet servent à pré-remplir le formulaire
- 
+
 ```html
 <form:form action="/personne/modifier" modelAttribute="personne" method="post">
     <form:hidden path="id" />

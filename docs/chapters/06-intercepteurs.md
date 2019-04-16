@@ -49,12 +49,12 @@ On peut définir un ensemble ordonné d’intercepteur
 boolean preHandle(
     HttpServletRequest request,
     HttpServletResponse response,
-    Object handler) 
+    Object handler)
 
 void postHandle(HttpServletRequest request,
     HttpServletResponse response,
     Object handler,
-    ModelAndView mav) 
+    ModelAndView mav)
 
 void afterCompletion(HttpServletRequest request,
     HttpServletResponse response,

@@ -88,7 +88,7 @@ view().name("accueil")
 Pour démarrer les assertions :
 ```java
 mockMvc.perform(get("/accueil"))
-    .andExpect(status().isOk()) 
+    .andExpect(status().isOk())
     .andExpect(…)
     …;
 ```

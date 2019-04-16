@@ -16,7 +16,7 @@ Validation côté client : facultative
  - Javascript
 
 Validation côté serveur : __obligatoire et systématique__
- 
+
 Contrôles unitaires sur le format des données (type, taille…)
  - on les retrouve quelle que soit l’application
  - Spring offre une solution clé en main
@@ -33,7 +33,7 @@ Contrôles métiers
 ### Validation unitaire
 
 Spring s’appuie sur la JSR 303 : Bean Validation
- - Java Specification Requests 
+ - Java Specification Requests
 
 Une série d’annotations
  - à ajouter sur les champs de la classe
@@ -163,10 +163,10 @@ Dans le corps de la méthode
 
 ```java
 public class Personne {
-    
+
     @Size(max = 500)
     private String nom;
-    
+
     public String getNom() {…
     public void setNom(String nom) {…
 }
@@ -321,13 +321,13 @@ Paramétrer Spring MVC pour utiliser le valideur
 Recherche les fichiers de la forme suivante à la racine du classpath :
 
  – `messages_fr.properties`,
- 
+
  – `messages_fr_FR.properties`,
- 
+
  – `messages_en.properties`,
- 
+
  – `erreurs_fr.properties`,
- 
+
  – `erreurs.properties`
 
 
