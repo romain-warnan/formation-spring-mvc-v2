@@ -204,7 +204,7 @@ De cette manière, l’utilisateur peut cliquer sur le nom d’un client pour en
 > ClientConverter.java
 
 Dans  le package `fr.insee.bar.converter`, créer une classe `ClientConverter` qui implémente de l’interface `Converter<String, Client>`.
-Ne pas oublier le stéréotype `@Component` sur la classe. 
+Ne pas oublier le stéréotype `@Component` sur la classe.
 Implémenter la méthode `convert` avec un appel à `clientDao.find(id)`.
 
 #### 2.3.2. Simplifier le contrôleur
@@ -230,9 +230,9 @@ Déclarer ce nouveau convertisseur auprès de la servlet de Spring MVC :
 	</property>
 </bean>
  ```
- 
+
  Tester que l’application fonctionne toujours.
- 
+
  ## 3. Intercepteurs
- 
- ### 3.1. 
+
+ ### 3.1.
