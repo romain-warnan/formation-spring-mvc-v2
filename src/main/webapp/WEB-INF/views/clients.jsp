@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/static/css/application.css">
     <link rel="icon" type="image/png" href="/static/favicon.png" />
-    <title>Accueil</title>
+    <title>Clients</title>
 </head>
 <body>
 	<header id="header">
@@ -13,12 +13,23 @@
 		<h1>Spring bar</h1>
 	</header>
 	<section id="content">
-		<p>
-			<c:out value="${message}" />
-		</p>
-		<ul>
-			<li><a href="<c:url value="clients" />">Liste des clients</a></li>
-		</ul>
+		<h1>Liste des clients</h1>
+		<table>
+		<tr>
+			<th>Id</th>
+			<th>Nom</th>
+		</tr>
+		<c:forEach items="${clients}" var="client">
+			<c:url var="url" value="client/${client.id}" />
+			<tr>
+				<td><a href="${url}">${client.nom}</a></td>
+				<td>${client.email}</td>
+			</tr>
+		</c:forEach>
+		</table>
+	</section>
+	<section id="footer">
+		<a href="${pageContext.request.contextPath}/accueil">Accueil</a>
 	</section>
 </body>
 </html>

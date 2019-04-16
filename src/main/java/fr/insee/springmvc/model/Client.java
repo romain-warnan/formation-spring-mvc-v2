@@ -28,15 +28,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @DynamicInsert
 public class Client {
 
-	public static Client EMPTY = new Client((long) 0, "<client>");
-
 	public Client() {
 		titre = Titre.M;
-	}
-
-	private Client(Long id, String nom) {
-		this.id = id;
-		this.nom = nom;
 	}
 
 	@Min(0)
