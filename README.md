@@ -85,32 +85,12 @@ Faire en sorte que l’URL racine `/` retourne également la page d’accueil.
 
 Tester en avec l’URL `http://localhost:8080` dans le navigateur.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 2. Navigation
 
 > Terminal
 
 ```bash
-git checkout -b tp2 tp2
+git checkout -b tp2 origin/tp2
 ```
 
 ### 2.1. Liste de tous les clients
@@ -124,12 +104,12 @@ Il récupère la liste de tous les clients dans la base de donnée et l’ajoute
 
 ```java
 	@Autowired
-	private ClientDao clientDao;
+	private ClientRepository clientRepository;
 	…
 	List<Client> clients = clientDao.findAll();
 ```
 
-Il lance la génération de la vue `/jsp/clients.jsp`.
+Il lance la génération de la vue `/views/clients.jsp`.
 
 #### 2.1.2. Afficher la liste des clients
 
@@ -180,7 +160,7 @@ Ce contrôleur possède une méthode qui est appelée à l’URL « /client/{id
 À l’aide de l’annotation `@PathVariable`, récupérer la valeur de l’identifiant passé dans l’URL.
 Dans la base, récupérer le client associé à cet identifiant.
 Ajouter le client au modèle.
-Diriger vers la page `/jsp/client.jsp`.
+Diriger vers la page `/views/client.jsp`.
 
 #### 2.2.2. Créer la page client.jsp
 
@@ -203,7 +183,7 @@ De cette manière, l’utilisateur peut cliquer sur le nom d’un client pour en
 
 > ClientConverter.java
 
-Dans  le package `fr.insee.bar.converter`, créer une classe `ClientConverter` qui implémente de l’interface `Converter<String, Client>`.
+Dans  le package `fr.insee.springmvc.converter`, créer une classe `ClientConverter` qui implémente de l’interface `Converter<String, Client>`.
 Ne pas oublier le stéréotype `@Component` sur la classe.
 Implémenter la méthode `convert` avec un appel à `clientDao.find(id)`.
 
@@ -211,25 +191,10 @@ Implémenter la méthode `convert` avec un appel à `clientDao.find(id)`.
 
 > ClientController.java
 
-Modifier la signature de la méthode pour remplacer le `Short` par un `Client`.
+Modifier la signature de la méthode pour remplacer le `Long` par un `Client`.
 Supprimer le DAO du contrôleur.
 
-#### 2.3.3. Enregistrer le convertissuer
-
-> dispatcher-servlet.xml
-
-Déclarer ce nouveau convertisseur auprès de la servlet de Spring MVC :
-
-```xml
-<mvc:annotation-driven conversion-service="conversionService" />
-<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-	<property name="converters">
-		<set>
-			<bean class="fr.insee.bar.converter.ClientConverter" />
-		</set>
-	</property>
-</bean>
- ```
+Tester que l’application fonctionne toujours.
 
  Tester que l’application fonctionne toujours.
 
