@@ -135,7 +135,7 @@ public class Client {
 
 	@Override
 	public boolean equals(Object object) {
-		if (object == null || !(object instanceof Client)) {
+		if (!(object instanceof Client)) {
 			return false;
 		}
 		Client other = (Client) object;

@@ -47,7 +47,7 @@ public class Role {
 
 	@Override
 	public boolean equals(Object object) {
-		if (object == null || !(object instanceof Role)) {
+		if (!(object instanceof Role)) {
 			return false;
 		}
 		Role other = (Role) object;

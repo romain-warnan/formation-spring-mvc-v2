@@ -65,7 +65,7 @@ public class Employe {
 
 	@Override
 	public boolean equals(Object object) {
-		if (object == null || !(object instanceof Employe)) {
+		if (!(object instanceof Employe)) {
 			return false;
 		}
 		Employe other = (Employe) object;

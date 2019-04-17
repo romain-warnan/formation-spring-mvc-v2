@@ -73,7 +73,7 @@ public class Cocktail {
 
 	@Override
 	public boolean equals(Object object) {
-		if (object == null || !(object instanceof Cocktail)) {
+		if (!(object instanceof Cocktail)) {
 			return false;
 		}
 		Cocktail other = (Cocktail) object;
