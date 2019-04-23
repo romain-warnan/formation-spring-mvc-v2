@@ -17,8 +17,11 @@
 			<c:out value="${message}" />
 		</p>
 		<ul>
-			<li><a href="<c:url value="clients" />">Liste des clients</a></li>
+			<li><a href="<c:url value="/clients" />">Liste des clients</a></li>
 		</ul>
 	</section>
+	<footer id="footer">
+		<a href="<c:url value="/utilisateur" />">${sessionScope.utilisateur.nom}</a>
+	</footer>
 </body>
 </html>

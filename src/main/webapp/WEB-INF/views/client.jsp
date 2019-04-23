@@ -14,9 +14,7 @@
 		<h1>Spring bar</h1>
 	</header>
 	<section id="content">
-		<h1>Informations client</h1>
-		<br />
-		<strong>Client n<sup>o</sup> ${client.id}</strong>
+		<h2>Client n<sup>o</sup> ${client.id}</h2>
 		<ul>
 			<li><label>Titre :</label> ${client.titre.libelle}</li>
 			<li><label>Nom :</label> ${client.nom}</li>
@@ -24,8 +22,8 @@
 			<li><label>Date de naissance :</label> <fmt:formatDate value="${client.dateNaissance}" pattern="dd MMMM yyyy"/></li>
 		</ul>
 	</section>
-	<section id="footer">
-		<a href="${pageContext.request.contextPath}/accueil">Accueil</a>
-	</section>
+	<footer id="footer">
+		<a href="<c:url value="/accueil" />">Accueil</a> | <a href="<c:url value="/utilisateur" />">${sessionScope.utilisateur.nom}</a>
+	</footer>
 </body>
 </html>
