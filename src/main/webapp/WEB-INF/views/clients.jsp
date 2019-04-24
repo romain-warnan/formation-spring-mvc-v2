@@ -13,7 +13,7 @@
 		<h1>Spring bar</h1>
 	</header>
 	<section id="content">
-		<h1>Liste des clients</h1>
+		<h2>Liste des clients</h2>
 		<table>
 		<tr>
 			<th>Id</th>
@@ -28,8 +28,8 @@
 		</c:forEach>
 		</table>
 	</section>
-	<section id="footer">
-		<a href="${pageContext.request.contextPath}/accueil">Accueil</a>
-	</section>
+	<footer id="footer">
+		<a href="<c:url value="/accueil" />">Accueil</a> | <a href="<c:url value="/utilisateur" />">${sessionScope.utilisateur.nom}</a>
+	</footer>
 </body>
 </html>
