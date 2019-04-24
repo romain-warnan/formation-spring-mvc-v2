@@ -236,7 +236,7 @@ git checkout -b tp3 origin/tp3
 
 > TimerInterceptor.java
 
-L’intercepteur implémente l’interface `HandlerInterceptor`.
+Implémenter l’interface `HandlerInterceptor`, et annoter la classe avec le stéréotype `@Component`.
 Démarrer un chronomètre (`Stopwatch` de la librairie Guava) dans la méthode `preHandle`.
 Enregistrer ce chronomètre en tant qu’attribut de la requête.
 Dans la méthode `postHandle`, imprimer dans la console l’URI de la requête et le temps écoulé.
@@ -259,6 +259,7 @@ registry.addInterceptor(it)
 > UtilisateurInterceptor.java
 
 Créer et enregistrer un intercepteur `UtilisateurInterceptor`.
+Implémenter l’interface `HandlerInterceptor`, et annoter la classe avec le stéréotype `@Component`.
 Dans l’intercepteur, essayer de récupèrer l’utilisater connecté dans la session.
 S’il n’y a pas d’utilisateur dans la session, le créer à partir du jeton Keycloak et l’ajouter à la session :
 
@@ -276,7 +277,7 @@ if(securityContext != null) {
 
 > accueil.jsp
 
-Sur la page, afficher le nom de l’utilisateur connecté dans le lien en bas de la page, pour cela le récupérer en session :
+Sur la page d’accueil, afficher le nom de l’utilisateur connecté dans le lien en bas de la page. Pour cela le récupérer en session :
 
 ```jsp
 ${sessionScope.utilisateur.nom}
@@ -291,6 +292,7 @@ Dans ce contrôleur, il faut récupérer l’utilisateur en session et l’ajout
 
 > UtilisateurResolver.java
 
+Implémenter l’interface `HandlerMethodArgumentResolver`, et annoter la classe avec le stéréotype `@Component`.
 Dans la méthode `resolveArgument`, récupérer l’objet `Utilisateur` qui est dans la session.
 
 > SpringMvcConfiguration.java
@@ -302,6 +304,9 @@ Injecter le résolveur d’argument et l’ajouter à la liste des résolveurs e
 Finalement, remplacer l’object `HttpSession` par un object `Utilisateur` dans la signature de la méthode. Spring va désormais utiliser le résolveur d’argument.
 
 ### Tester
+
+Exécuter les tests unitaires.
+Puis lancer l’application et tester la navigation. 
 
 ```bash
 git add .
