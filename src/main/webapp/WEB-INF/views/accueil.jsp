@@ -21,7 +21,7 @@
 		</ul>
 	</section>
 	<footer id="footer">
-		<a href="<c:url value="/utilisateur" />">${sessionScope.utilisateur.nom}</a>
+		<a href="<c:url value="/utilisateur" />"><!-- Nom de l'utilisateur connecté --></a>
 	</footer>
 </body>
 </html>

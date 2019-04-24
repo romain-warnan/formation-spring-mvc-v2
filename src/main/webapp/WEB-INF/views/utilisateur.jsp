@@ -24,7 +24,7 @@
 		</select>
 	</section>
 	<footer id="footer">
-		<a href="<c:url value="/accueil" />">Accueil</a> | <a href="<c:url value="/utilisateur" />">${sessionScope.utilisateur.nom}</a>
+		<a href="<c:url value="/accueil" />">Accueil</a>
 	</footer>
 </body>
 </html>
