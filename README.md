@@ -117,9 +117,9 @@ git checkout -b solution-tp1 origin/solution-tp1
 git checkout -b tp2 origin/tp2
 ```
 
-### 2.1. Liste de tous les clients
+### Liste de tous les clients
 
-#### 2.1.1. Créer un contrôleur qui permet d’afficher la liste de tous les clients
+#### Créer un contrôleur qui permet d’afficher la liste de tous les clients
 
 > ClientsController.java
 
@@ -135,7 +135,7 @@ Il récupère la liste de tous les clients dans la base de donnée et l’ajoute
 
 Il lance la génération de la vue `/views/clients.jsp`.
 
-#### 2.1.2. Afficher la liste des clients
+#### Afficher la liste des clients
 
 > clients.jsp
 
@@ -163,20 +163,20 @@ En itérant sur la liste des clients avec le tag `<c:forEach>`, afficher la list
 	</table>
 ```
 
-#### 2.1.3. Ajouter un lien vers la page d’accueil
+#### Ajouter un lien vers la page d’accueil
 
 > clients.jsp
 
 Grace au tag `<c:url>` créer une variable qui pointe vers la page d’accueil.
 Utiliser cette variable dans un lien qui redirige vers la page d’accueil.
 
-#### 2.1.4. Sur la page d’accueil, ajouter un lien vers la page de la liste des clients
+#### Sur la page d’accueil, ajouter un lien vers la page de la liste des clients
 
 > accueil.jsp
 
-### 2.2. Détails pour un client donné
+### Détails pour un client donné
 
-#### 2.2.1. Créer un contrôleur qui permet d’afficher les informations concernant un client donné
+#### Créer un contrôleur qui permet d’afficher les informations concernant un client donné
 
 > ClientController.java
 
@@ -186,7 +186,7 @@ Dans la base, récupérer le client associé à cet identifiant.
 Ajouter le client au modèle.
 Diriger vers la page `/views/client.jsp`.
 
-#### 2.2.2. Créer la page client.jsp
+#### Créer la page client.jsp
 
 > client.jsp
 
@@ -194,16 +194,16 @@ Y afficher les informations relatives au client : identifiant, nom, email et dat
 Pour formater la date, utiliser le tag `<fmt:formatDate>` et le format `dd/MMMM/yyyy`.
 Ajouter un lien vers la page d’accueil.
 
-#### 2.2.3. Faire le lien entre la page clients et les sous-pages client
+#### Faire le lien entre la page clients et les sous-pages client
 
 > clients.jsp
 
 Autour de chaque nom de client, ajouter un lien qui pointe vers l’URL `/client/{id}`.
 De cette manière, l’utilisateur peut cliquer sur le nom d’un client pour en voir le détail.
 
-### 2.3. Utilisation d’un convertisseur
+### Utilisation d’un convertisseur
 
-#### 2.3.1. Créer le nouveau convertisseur
+#### Créer le nouveau convertisseur
 
 > ClientConverter.java
 
@@ -211,7 +211,7 @@ Dans  le package `fr.insee.springmvc.converter`, créer une classe `ClientConver
 Ne pas oublier le stéréotype `@Component` sur la classe.
 Implémenter la méthode `convert` avec un appel à `clientDao.find(id)`.
 
-#### 2.3.2. Simplifier le contrôleur
+#### Simplifier le contrôleur
 
 > ClientController.java
 
@@ -229,119 +229,84 @@ git checkout -b solution-tp2 origin/solution-tp2
 ## 3. Intercepteurs
 
 ```bash
-git checkout tp3-enonce
-git pull
+git checkout -b tp3 origin/tp3
 ```
 
-### 3.1. Créer un intercepteur qui mesure la durée de la requête
+### Créer un intercepteur qui mesure la durée de la requête
 
 > TimerInterceptor.java
 
-:clipboard: [Aide](https://romain-warnan.github.io/formation-spring-mvc/#/6/5)
-
 L’intercepteur implémente l’interface `HandlerInterceptor`.
-Démarrer un chronomètre (`Stopwatch` de la librairie guava) dans la méthode `preHandle`.
+Démarrer un chronomètre (`Stopwatch` de la librairie Guava) dans la méthode `preHandle`.
 Enregistrer ce chronomètre en tant qu’attribut de la requête.
 Dans la méthode `postHandle`, imprimer dans la console l’URI de la requête et le temps écoulé.
 
 ### 3.2. Enregistrer l’intercepteur
 
-> dispatcher-servlet.xml
+> SpringMvcConfiguration.java
 
-Déclarer l’intercepteur auprès de la servlet de Spring MVC.
+Injecter l’intercepteur et l’ajouter au registre en surchargeant la méthode `addInterceptors`.
 Penser à exclure les URL commençant par « /static », car sinon on passe aussi dans l’intercepteur pour le fichier CSS.
 
-```xml
-<mvc:interceptors>
-	<mvc:interceptor>
-		<mvc:mapping path="/**"/>
-		<mvc:exclude-mapping path="/static/**"/>
-		<bean class="fr.insee.bar.interceptor.TimerInterceptor" />
-	</mvc:interceptor>
-</mvc:interceptors>
+```java
+registry.addInterceptor(it)
+	.addPathPatterns("/**")
+	.excludePathPatterns("/static/**")
 ```
 
-### 3.3. Placer l’employé connecté en session
+### Placer l’utilisateur connecté en session
 
-> EmployeInterceptor.java
+> UtilisateurInterceptor.java
 
-Créer et enregistrer un intercepteur `EmployeInterceptor`.
-Dans l’intercepteur, récupèrer l’employé connecté dans la session.
-Si aucun employé n’est présent en session, récupérer le grâce au service `EmployeProvider` et sa méthode `provide()` et placer l’objet obtenu dans la session.
+Créer et enregistrer un intercepteur `UtilisateurInterceptor`.
+Dans l’intercepteur, essayer de récupèrer l’utilisater connecté dans la session.
+S’il n’y a pas d’utilisateur dans la session, le créer à partir du jeton Keycloak et l’ajouter à la session :
 
-### 3.4. Créer une nouvelle page pour l’ajout d’un client
-
-> nouveau-client.jsp
-
-Créer une nouvelle JSP qui ne contient qu’un titre.
-
-> NouveauClientController.java
-
-Créer un nouveau contrôleur qui dirige vers cette page.
-
-> clients.jsp
-
-Sur la page de la liste des clients, ajouter un lien qui dirige vers la nouvelle page.
-
-### 3.5. Vérifier que l’employé connecté a le droit de se rendre sur la page d’ajout d’un nouveau client
-
-#### 3.5.1. Vérifier les droits dans le contrôleur
-
-> NouveauClientController.java
-
-Dans la signature de la méthode, ajouter un objet `HttpSession`.
-Grace au service `EmployeService`, vérifier que l’employé contenu dans la session (`(Employe) session.getAttribute("employe")`) possède le rôle de responsable.
-Si oui, le diriger vers la nouvelle page `nouveau-client.jsp`, sinon, le rediriger vers la page `clients.jsp`.
-
-#### 3.5.2. Créer et déclarer un résolveur d’argument pour la classe `Employe`
-
-:clipboard: [Aide](https://romain-warnan.github.io/formation-spring-mvc/#/4/11)
-
-> EmployeResolver.java
-
-Dans la méthode `resolveArgument`, récupérer l’objet `Employe` qui est dans la session.
-
-> dispatcher-servlet.xml
-
-Déclarer ce nouveau résolveur d’argument auprès de la servlet de Spring MVC.
-
-```xml
-<mvc:annotation-driven conversion-service="conversionService">
-	<mvc:argument-resolvers>
-		<bean class="fr.insee.bar.resolver.EmployeResolver" />
-	</mvc:argument-resolvers>
-</mvc:annotation-driven>
+```java
+var securityContext = (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
+if(securityContext != null) {
+	var token = securityContext.getToken();
+	utilisateur = Utilisateur.fromToken(token);
+	...
+}
 ```
 
-> NouveauClientController.java
 
-Finalement, remplacer l’object `HttpSession` par un object `Employe` dans la signature de la méthode. Spring va désormais utiliser le résolveur d’argument.
+### Créer une nouvelle page qui permet d’afficher l’utilisateur connecté
 
-### 3.6. Tester
+> accueil.jsp
 
-1. Démarrer le Tomcat tel quel et vérifier qu’on peut se rendre sur la page.
-2. Dans le fichier web.xml, activer le profile de `serveur` à la place du profile de `responsable`.
-3. Démarrer le Tomcat et vérifier qu’on ne peut pas se rendre sur la page.
+Sur la page, afficher le nom de l’utilisateur connecté dans le lien en bas de la page, pour cela le récupérer en session :
 
-> web.xml
-
-```xml
-<context-param>
-	<param-name>spring.profiles.active</param-name>
-	<param-value>serveur</param-value>
-</context-param>
+```jsp
+${sessionScope.utilisateur.nom}
 ```
 
-> :question: Quand on change le profile dans le fichier web.xml, Spring instancie une autre implémentation de l’interface `EmployeProvider` au chargement du contexte. Il y a en effet deux versions de la classe :
-> - `ResponsableProvider` annotée `@Profile("responsable")`, qui fournit un employé ayant le rôle de *responsable*,
-> - `ServeurProvider` annotée `@Profile("serveur")`, qui fournit un employé ayant le rôle de *serveur*.
+> UtilisateurController.java
 
-> Seule une seule des deux versions existe dans le contexte Spring. L’annotation `@Autowired` peut donc être utilisée sans problème pour injecter un `EmployeProvider`.
+Créer un nouveau contrôleur qui dirige vers la page `/WEB-INF/views/utilisateur.jsp`.
+Dans ce contrôleur, il faut récupérer l’utilisateur en session et l’ajouter au modèle.
+
+#### Créer et déclarer un résolveur d’argument pour la classe `Utilisateur`
+
+> UtilisateurResolver.java
+
+Dans la méthode `resolveArgument`, récupérer l’objet `Utilisateur` qui est dans la session.
+
+> SpringMvcConfiguration.java
+
+Injecter le résolveur d’argument et l’ajouter à la liste des résolveurs en surchargeant la méthode `addArgumentResolvers`.
+
+> UtilisateurController.java
+
+Finalement, remplacer l’object `HttpSession` par un object `Utilisateur` dans la signature de la méthode. Spring va désormais utiliser le résolveur d’argument.
+
+### Tester
 
 ```bash
 git add .
 git commit -m "TP3 <idep>"
-git checkout tp3-correction
+git checkout -b solution-tp3 origin/solution-tp3
 git pull
 ```
 
