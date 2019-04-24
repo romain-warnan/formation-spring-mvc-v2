@@ -11,7 +11,7 @@ public class Utilisateur {
 	private String nom, email, idep;
 	private Set<String> roles;
 	
-	private Utilisateur() {}
+	public Utilisateur() {}
 	
 	public static Utilisateur fromToken(AccessToken token) {
 		Utilisateur utilisateur = new Utilisateur();
