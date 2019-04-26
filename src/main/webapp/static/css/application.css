@@ -89,11 +89,8 @@ button:hover {
 .error, .erreur {
 	font-weight: bold;
 	color: red;
-	border-radius: 5px;
-	border: solid red 2px;
 	display: inline-block;
-	padding: 10px;
-	background-color: lightpink;
+	margin: 0 15px;
 }
 
 #cocktails {

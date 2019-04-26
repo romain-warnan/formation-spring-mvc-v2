@@ -1,10 +1,12 @@
 package fr.insee.springmvc.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,7 +31,10 @@ public class ModificationClientController {
 	}
 	
 	@PostMapping("/client/{id}/modification")
-	public String enregistrerModificationClient(@PathVariable("id") Client clientBase, @ModelAttribute Client clientForm, RedirectAttributes model) {
+	public String enregistrerModificationClient(@PathVariable("id") Client clientBase, @Valid Client clientForm, BindingResult result, RedirectAttributes model) {
+		if(result.hasErrors()) {
+			return "modification-client";
+		}
 		clientService.updateWith(clientBase, clientForm);
 		clientRepository.save(clientBase);
 		model.addFlashAttribute("modification", true);
