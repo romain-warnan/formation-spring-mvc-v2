@@ -1,14 +1,20 @@
 package fr.insee.springmvc.service;
 
 import java.util.Objects;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.insee.springmvc.model.Client;
+import fr.insee.springmvc.repository.ClientRepository;
 
 @Service
 public class ClientService {
 
+	@Autowired
+	private ClientRepository clientRepository;
+	
 	public Client updateWith(Client from, Client to) {
 		Objects.requireNonNull(from);
 		Objects.requireNonNull(to);
@@ -18,5 +24,12 @@ public class ClientService {
 		if(to.getNom() != null) from.setNom(to.getNom());
 		if(to.getDateNaissance() != null) from.setDateNaissance(to.getDateNaissance());
 		return from;
+	}
+	
+	public boolean emailDejaUtilise(Client client) {
+		Optional<Client> optional = clientRepository.findByEmail(client.getEmail());
+		return optional
+			.filter(other -> other.getId() == client.getId())
+			.isPresent();
 	}
 }
