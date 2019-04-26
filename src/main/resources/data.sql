@@ -1,5 +1,5 @@
 -- https://www.mockaroo.com/
-insert into clients (id, nom, email, date_naissance, titre) values (next value for seq, 'Wanda Gray', 'wgray0@ebay.co.uk', date '1988-07-26', 1);
+insert into clients (id, nom, email, date_naissance, titre) values (next value for seq, 'Wanda Gray', 'wgray0@ebay.uk', date '1988-07-26', 1);
 insert into clients (id, nom, email, date_naissance, titre) values (next value for seq, 'Lisa Mcdonald', 'lmcdonald1@de.vu', date '1952-06-04', 1);
 insert into clients (id, nom, email, date_naissance, titre) values (next value for seq, 'Barbara Kim', 'bkim2@deviantart.com', date '1958-07-31', 1);
 insert into clients (id, nom, email, date_naissance, titre) values (next value for seq, 'Kevin Sims', 'ksims3@usatoday.com', date '1986-06-03', 0);

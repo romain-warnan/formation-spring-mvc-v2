@@ -18,10 +18,10 @@
 		<h2>Client n<sup>o</sup> ${client.id} : modification</h2>
 		<form:form action="/client/${client.id}/modification" modelAttribute="client">
 		<ul>
-			<li><label>Titre :</label> <form:select path="titre"><form:options itemLabel="libelle"/></form:select></li>
-			<li><label>Nom :</label> <form:input path="nom" /></li>
-			<li><label>Email :</label> <form:input path="email" /></li>
-			<li><label>Date de naissance :</label> <form:input path="dateNaissance" /></li>
+			<li><label>Titre :</label> <form:select path="titre"><form:options itemLabel="libelle"/></form:select><form:errors cssClass="error" path="titre" /></li>
+			<li><label>Nom :</label> <form:input path="nom" /><form:errors cssClass="error" path="nom" /></li>
+			<li><label>Email :</label> <form:input path="email" /><form:errors cssClass="error" path="email" /></li>
+			<li><label>Date de naissance :</label> <form:input path="dateNaissance" /><form:errors cssClass="error" path="dateNaissance" /></li>
 		</ul>
 		<button type="submit">Enregistrer</button>
 		</form:form>
