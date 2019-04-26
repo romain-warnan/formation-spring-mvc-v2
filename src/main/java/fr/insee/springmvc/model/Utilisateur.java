@@ -21,6 +21,15 @@ public class Utilisateur {
 		utilisateur.roles = token.getRealmAccess().getRoles();
 		return utilisateur;
 	}
+	
+	public static Utilisateur defaultUser() {
+		Utilisateur utilisateur = new Utilisateur();
+		utilisateur.nom = "Default User";
+		utilisateur.idep = "idep";
+		utilisateur.email = "default.user@insee.fr";
+		utilisateur.roles = Set.of("spring_mvc");
+		return utilisateur;
+	}
 
 	public String getNom() {
 		return nom;

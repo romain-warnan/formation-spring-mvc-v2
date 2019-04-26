@@ -22,12 +22,9 @@ public class UtilisateurInterceptor implements HandlerInterceptor {
 		var utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		if(utilisateur == null) {
 			var securityContext = (KeycloakSecurityContext) request.getAttribute(KeycloakSecurityContext.class.getName());
-			if(securityContext != null) {
-				var token = securityContext.getToken();
-				utilisateur = Utilisateur.fromToken(token);
-				session.setAttribute("utilisateur", utilisateur);
-				logger.info("Connexion de l’utilisateur : " + utilisateur);
-			}
+			utilisateur = securityContext != null ? Utilisateur.fromToken(securityContext.getToken()) : Utilisateur.defaultUser();
+			session.setAttribute("utilisateur", utilisateur);
+			logger.info("Connexion de l’utilisateur : " + utilisateur);
 		}
 		return true;
 	}
