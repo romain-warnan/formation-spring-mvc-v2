@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "welcome.message",
+  "type": "java.lang.String",
+  "description": "Message affiché sur la page d’accueil'"
+}]}
