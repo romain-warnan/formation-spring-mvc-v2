@@ -40,29 +40,8 @@ ul > li:before {
 	margin-left: -1.1em;
 }
 
-form {
-	width: 500px;
-	position: relative;
-}
-
-form label {
-	display: inline-block;
-	width: 150px;
-	text-alignr: right;
-	margin: 10px;
-}
-
-select, input[type='text'] {
-	display: inline-block;
-	border-radius: 3px;
-	border: solid black 1px;
-	padding: 4px;
-}
-
-select {
-	width: 210px;
-	margin: 10px 0px 10px 10px;
-
+ul > li {
+	margin: 20px 10px;
 }
 
 select[multiple='multiple'] {
@@ -71,13 +50,11 @@ select[multiple='multiple'] {
 	margin: 10px 0;
 }
 
-input[type='text'] {
-	display: inline-block;
-	width: 200px;
-	margin: 10px;
+select, input[type='text'] {
 	border-radius: 3px;
 	border: solid black 1px;
-	padding: 4px;
+	font-size: 100%;
+	padding: 1px 4px;
 }
 
 button {
@@ -92,11 +69,6 @@ button {
 	font-weight: bold;
 	font-size: 16px;
 	width: 120px;
-}
-
-button[type='submit'] {
-	position: absolute;
-	right: 10px;
 }
 
 button:hover {
