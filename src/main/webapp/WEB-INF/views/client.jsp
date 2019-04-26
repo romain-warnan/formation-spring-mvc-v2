@@ -22,8 +22,11 @@
 			<li><label>Date de naissance :</label> <fmt:formatDate value="${client.dateNaissance}" pattern="dd MMMM yyyy"/></li>
 		</ul>
 	</section>
+	<c:if test="${modification}">
+		<p class="success">Le client a été modifié avec succès</p>
+	</c:if>
 	<footer id="footer">
-		<a href="<c:url value="/accueil" />">Accueil</a> | <a href="<c:url value="/utilisateur" />">${sessionScope.utilisateur.nom}</a>
+		<a href="<c:url value="/accueil" />">Accueil</a> | <a href="<c:url value="/client/${client.id}/modification" />">Modification</a> | <a href="<c:url value="/utilisateur" />">${sessionScope.utilisateur.nom}</a>
 	</footer>
 </body>
 </html>

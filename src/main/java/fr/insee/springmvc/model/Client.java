@@ -16,6 +16,7 @@ import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "clients")
@@ -44,6 +45,7 @@ public class Client {
 	@Enumerated(EnumType.ORDINAL)
 	private Titre titre;
 
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "date_naissance")
 	private Date dateNaissance;
 
