@@ -376,7 +376,7 @@ Le formulaire possède les éléments suivants :
  - un champ de texte pour la date de naissance au format *jj/mm/aaaa* ;
  - un bouton « Enregistrer » qui poste les données du formulaire vers le serveur (`<button type="submit">`).
 
-![Formulaire nouveau client](docs/images/formulaire-nouveau-client.png)
+![Formulaire nouveau client](docs/images/formulaire-modification-client.png)
 
 #### Enregistrer les modifications en base de données
 
