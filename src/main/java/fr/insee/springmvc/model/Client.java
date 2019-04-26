@@ -13,6 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -35,17 +39,22 @@ public class Client {
 	@Column(name = "id")
 	private Long id;
 
+	@Size(min = 5, max = 50)
 	@Column(name = "nom")
 	private String nom;
 
+	@Pattern(regexp = "[-_a-z0-9.]+@[-_a-z0-9]+\\.[a-z]{2,4}")
 	@Column(name = "email")
 	private String email;
 
+	@NotNull
 	@Column(name = "titre")
 	@Enumerated(EnumType.ORDINAL)
 	private Titre titre;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@NotNull
+	@Past
 	@Column(name = "date_naissance")
 	private Date dateNaissance;
 
