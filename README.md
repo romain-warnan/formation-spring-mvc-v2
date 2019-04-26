@@ -40,6 +40,24 @@ cd formation-spring-mvc
 * Root directory : D:\idep\Mes Documents\eclipse_workspace\formation-spring-mvc
 * Finish
 
+### Optimiser le processus développements
+
+Ajouter les « Spring dev-tools » :
+
+> pom.xml
+
+```
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-devtools</artifactId>
+	<optional>true</optional>
+</dependency>
+```
+
+Ajouter l'extension [RemoteLiveReload](https://chrome.google.com/webstore/detail/remotelivereload/jlppknnillhjgiengoigajegdpieppei?hl=fr-FR) et l'activer sur la page `http://localhost:8080`.
+
+Installer la « Spring Tool Suit » en cherchant `sts` dans le *Eclipse Marketplace*. 
+
 ## 1. Mise en place
 
 ```bash
