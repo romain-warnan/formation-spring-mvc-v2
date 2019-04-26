@@ -32,7 +32,7 @@ public class Client {
 		titre = Titre.M;
 	}
 
-	@Min(0)
+	@Min(value = 0, message = "{client.id.positif}")
 	@Id
 	@GeneratedValue(generator = "barGenerator")
 	@SequenceGenerator(name = "barGenerator", sequenceName = "seq", allocationSize = 1, initialValue = 100)
@@ -43,18 +43,18 @@ public class Client {
 	@Column(name = "nom")
 	private String nom;
 
-	@Pattern(regexp = "[-_a-z0-9.]+@[-_a-z0-9]+\\.[a-z]{2,4}")
+	@Pattern(regexp = "[-_a-z0-9.]+@[-_a-z0-9]+\\.[a-z]{2,4}", message = "{client.email.regex}")
 	@Column(name = "email")
 	private String email;
 
-	@NotNull
+	@NotNull(message = "{client.titre.non.vide}")
 	@Column(name = "titre")
 	@Enumerated(EnumType.ORDINAL)
 	private Titre titre;
 
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	@NotNull
-	@Past
+	@NotNull(message = "{client.date.naissance.non.vide}")
+	@Past(message = "{client.date.naissance.passee}")
 	@Column(name = "date_naissance")
 	private Date dateNaissance;
 
