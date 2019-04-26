@@ -54,9 +54,9 @@ Ajouter les « Spring dev-tools » :
 </dependency>
 ```
 
-Ajouter l'extension [RemoteLiveReload](https://chrome.google.com/webstore/detail/remotelivereload/jlppknnillhjgiengoigajegdpieppei?hl=fr-FR) et l'activer sur la page `http://localhost:8080`.
+Ajouter l’extension [RemoteLiveReload](https://chrome.google.com/webstore/detail/remotelivereload/jlppknnillhjgiengoigajegdpieppei?hl=fr-FR) et l’activer sur la page `http://localhost:8080`.
 
-Installer la « Spring Tool Suit » en cherchant `sts` dans le *Eclipse Marketplace*. 
+Installer la « Spring Tool Suit » en cherchant `sts` dans le *Eclipse Marketplace*.
 
 ## 1. Mise en place
 
@@ -306,7 +306,7 @@ ${sessionScope.utilisateur.nom}
 Créer un nouveau contrôleur qui dirige vers la page `/WEB-INF/views/utilisateur.jsp`.
 Dans ce contrôleur, il faut récupérer l’utilisateur en session et l’ajouter au modèle.
 
-#### Créer et déclarer un résolveur d’argument pour la classe `Utilisateur`
+### Créer et déclarer un résolveur d’argument pour la classe `Utilisateur`
 
 > UtilisateurResolver.java
 
@@ -324,7 +324,7 @@ Finalement, remplacer l’object `HttpSession` par un object `Utilisateur` dans 
 ### Tester
 
 Exécuter les tests unitaires.
-Puis lancer l’application et tester la navigation. 
+Puis lancer l’application et tester la navigation.
 
 ```bash
 git add .
@@ -336,107 +336,103 @@ git pull
 ## 4. Formulaires
 
 ```bash
-git checkout tp4-enonce
-git pull
+git checkout -b tp4 origin/tp4
 ```
 
-### 4.1. Ajouter un nouveau client
-
-#### 4.1.1. Créer un contrôlleur qui dirige vers le formulaire de saisie d’un nouveau client
-
-> NouveauClientController.java
-
-Dans un premier temps, il faut une seule méthode associée à l’URL `GET /client/nouveau`.
-Elle ajoute au modèle un client vide.
-Elle dirige vers le formulaire d’ajout d’un nouveau client.
-
-#### 4.1.2. Compléter la page qui permet de créer un nouveau client
-
-> nouveau-client.jsp
-
-La page doit comprendre un formulaire `<form:form>` qui servira à poster les données.
-La balise doit contenir un attribut `modelAttribute` contenant le client vide.
-Le formulaire possède les éléments suivants :
-
-* un menu déroulant (`<form:select>` contenant un `<form:options />`) pour le titre (Monsieur ou Madame) ;
-* un champ de texte pour le nom ;
-* un champ de texte pour l’adresse email ;
-* un champ de texte pour la date de naissance au format *jj/mm/aaaa* ;
-* un bouton « Créer » qui poste les données du formulaire vers le serveur (`<button type="submit">`).
-
-![Formulaire nouveau client](docs/images/formulaire-nouveau-client.png)
-
-#### 4.1.3. Enregistrer le nouveau client en base de données
-
-> NouveauClientController.java
-
-Ajouter une nouvelle méthode associée à l’URL `POST /client/nouveau` qui prend en paramètre un objet `Client` annoté `@ModelAttribute` et qui encapsule les données postées depuis le formulaire.
-
-:question: Pour que le format de la date soit bien pris en compte par Spring MVC, penser à ajouter une annotation `@DateTimeFormat(pattern = "dd/MM/yyyy")` dans la classe `Client`.
-
-Sans contrôles préalables, insérer le nouveau client en base (méthode `ClientDao.insert)`.
-Rediriger vers la liste des clients.
-
-#### 4.1.4. Afficher un message au dessus de la liste des clients
-
-> NouveauClientController.java
-
-Placer le client nouvellement créé dans un *flashAttribute* de manière à pouvoir y accéder après la redirection.
-
-> clients.jsp
-
-Si un client est accessible dans le modèle, afficher un message de succès de la forme : « Le client *mail* a été créé avec succès ».
-
-:question: Pour obtenir un message de succès, utiliser la class CSS `class="success"`.
-
-### 4.2. Modifier un client existant
-
-#### 4.2.1. Créer le contrôleur adéquat
+### Créer un contrôleur qui permet d’aller sur la page de modification d’un client
 
 > ModificationClientController.java
 
-Comme précédemment, le contrôleur contient deux méthodes :
-
-* une associée à l’URL `GET /client/modification`,
-* et une associée à l’URL `POST /client/modification`.
-
-:exclamation: Attention, cette fois, la méthode qui affiche le formulaire doit le pré-remplir et donc prendre en argument le client issu de la base pour l’ajouter au modèle.
-
-Pour faire la modification en base, utiliser sans contrôles préalables, la méthode `ClientDao.update`.
-Ensuite rediriger vers la page d’information du client.
-
-#### 4.2.2. Ajouter un lien vers le formulaire de modification d’un client
+Dans un premier temps, il faut une seule méthode associée à l’URL `GET /client/{id}/modification`
+ - dans laquelle le client correspondant à la variable `{id}` est ajouté au modèle ;
+ - et qui dirige vers le formulaire d’ajout d’un nouveau client : `modification-client.jsp`.
 
 > client.jsp
 
-Le lien est paramétré par l’identifiant du client à modifier.
+Ajouter un lien qui permet d’accéder au formulaire de modification du client
+```jsp
+<a href="<c:url value="/client/${client.id}/modification" />">Modification</a>
+```
 
-#### 4.2.3. Créer la page du formulaire pré-rempli
+#### Créer la page qui permet de modifier un client
 
 > modification-client.jsp
 
-Pour que les champs soient pré-remplis avec les données issues de la base, utiliser des balises `<form:...`.
+Ne pas oublier la bibliothèque de balise nécessaires pour les formulaires :
+```jsp
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+```
 
-:exclamation: Il ne faut pas oublier d’ajouter un champ caché qui contient l’identifiant du client qu’on est en train de modifier.
+La page doit comprendre un formulaire `<form:form>` qui servira à poster les données, ce formulaire sera pré-rempli avec les données de la base :
+```jsp
+<form:form action="/client/${client.id}/modification" modelAttribute="client">
+```
+La balise doit contenir un attribut `modelAttribute` contenant le client vide.
+Le formulaire possède les éléments suivants :
 
-![Formulaire modification client](docs/images/formulaire-modification-client.png)
+ - un menu déroulant (`<form:select>` contenant un `<form:options />`) pour le titre (Monsieur ou Madame) ;
+ - un champ de texte pour le nom ;
+ - un champ de texte pour l’adresse email ;
+ - un champ de texte pour la date de naissance au format *jj/mm/aaaa* ;
+ - un bouton « Enregistrer » qui poste les données du formulaire vers le serveur (`<button type="submit">`).
 
-#### 4.2.4. Afficher un message au dessus de la liste des clients
+![Formulaire nouveau client](docs/images/formulaire-nouveau-client.png)
+
+#### Enregistrer les modifications en base de données
 
 > ModificationClientController.java
 
-Placer un booléen `modification=true` dans un *flashAttribute* de manière à pouvoir y accéder après la redirection.
+Ajouter une nouvelle méthode associée à l’URL `POST /client/{id}/modification` qui prend en paramètre deux objets de type `Client` :
+ - un en provenance de la base de donnée, annoté `@PathVariable`
+ - et un autre en provenance du formulaire, annoté `@ModelAttribute`
+
+:question: Pour que le format de la date soit bien pris en compte par Spring MVC, penser à ajouter une annotation `@DateTimeFormat(pattern = "dd/MM/yyyy")` dans la classe `Client` sur le champ `dateNaissance`.
+
+Injecter les instance des classe `ClientRepository` et `ClientService` dans le contrôleur.
+ - Utiliser la méthode `updateWith` de la classe `ClientService` pour mettre à jour le client issu de la base à partir du client issu du formulaire avec la méthode.
+ - Sans contrôles préalables, utiliser la méthode `save` de la classe `ClientRepository` pour enregistrer les modifications du client en base.
+
+Rediriger vers la page du client :
+```java
+return "redirect:/client/{id}"
+```
+
+#### Afficher un message sur la page du client mis à jour
+
+> ModificationClientController.java
+
+Ajouter un paramètre de type `RedirectAttributes` au contrôleur associé à la requête `POST /client/{id}/modification`.
+Lui ajouter un *flashAttribute* nommé `"modification"` et valant `true` de manière à pouvoir y accéder après la redirection.
 
 > client.jsp
 
-Si un un booléen `modification` est accessible dans le modèle, afficher un message de succès de la forme : « Le client a été modifié avec succès ».
+Si un un booléen `modification` est accessible dans le modèle, afficher le message : « Le client a été modifié avec succès » avec la class CSS `class="success"`.
 
 ```bash
 git add .
 git commit -m "TP4 <idep>"
-git checkout tp4-correction
-git pull
+git checkout solution-tp4
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 5. Validation
 
