@@ -46,11 +46,11 @@ Ajouter les « Spring dev-tools » :
 
 > pom.xml
 
-```
+```xml
 <dependency>
-	<groupId>org.springframework.boot</groupId>
-	<artifactId>spring-boot-devtools</artifactId>
-	<optional>true</optional>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <optional>true</optional>
 </dependency>
 ```
 
@@ -145,10 +145,10 @@ Ce contrôleur possède une méthode qui est appelée à l’URL « /clients �
 Il récupère la liste de tous les clients dans la base de donnée et l’ajoute au modèle.
 
 ```java
-	@Autowired
-	private ClientRepository clientRepository;
-	…
-	List<Client> clients = clientDao.findAll();
+@Autowired
+private ClientRepository clientRepository;
+…
+List<Client> clients = clientDao.findAll();
 ```
 
 Il lance la génération de la vue `/views/clients.jsp`.
@@ -162,23 +162,23 @@ En itérant sur la liste des clients avec le tag `<c:forEach>`, afficher la list
 > Rappel : structure d’un tableau HTML
 
 ```html
-	<table>
-		<tr> <!-- Ligne entête -->
-			<th>Entête 1</th>
-			<th>Entête 2</th>
-			<th>Entête 3</th>
-		</tr>
-		<tr> <!-- Ligne 1 -->
-			<td>Cellule 1.1</td>
-			<td>Cellule 1.2</td>
-			<td>Cellule 1.3</td>
-		</tr>
-		<tr> <!-- Ligne 2 -->
-			<td>Cellule 2.1</td>
-			<td>Cellule 2.2</td>
-			<td>Cellule 2.3</td>
-		</tr>
-	</table>
+<table>
+    <tr> <!-- Ligne entête -->
+        <th>Entête 1</th>
+        <th>Entête 2</th>
+        <th>Entête 3</th>
+    </tr>
+    <tr> <!-- Ligne 1 -->
+        <td>Cellule 1.1</td>
+        <td>Cellule 1.2</td>
+        <td>Cellule 1.3</td>
+    </tr>
+    <tr> <!-- Ligne 2 -->
+        <td>Cellule 2.1</td>
+        <td>Cellule 2.2</td>
+        <td>Cellule 2.3</td>
+    </tr>
+</table>
 ```
 
 #### Ajouter un lien vers la page d’accueil
@@ -202,7 +202,7 @@ Ce contrôleur possède une méthode qui est appelée à l’URL « /client/{id
 À l’aide de l’annotation `@PathVariable`, récupérer la valeur de l’identifiant passé dans l’URL.
 Dans la base, récupérer le client associé à cet identifiant.
 Ajouter le client au modèle.
-Diriger vers la page `/views/client.jsp`.
+Diriger vers la page `client.jsp`.
 
 #### Créer la page client.jsp
 
