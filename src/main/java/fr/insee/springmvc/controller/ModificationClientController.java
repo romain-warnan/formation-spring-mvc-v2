@@ -2,6 +2,7 @@ package fr.insee.springmvc.controller;
 
 import javax.validation.Valid;
 
+import fr.insee.springmvc.validator.ClientValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,9 @@ public class ModificationClientController {
 	private ClientService clientService;
 
 	@Autowired
+    private ClientValidator clientValidator;
+
+	@Autowired
 	private ClientRepository clientRepository;
 	
 	@GetMapping("/client/{id}/modification")
@@ -32,6 +36,7 @@ public class ModificationClientController {
 	
 	@PostMapping("/client/{id}/modification")
 	public String enregistrerModificationClient(@PathVariable("id") Client clientBase, @Valid Client clientForm, BindingResult result, RedirectAttributes model) {
+        clientValidator.validate(clientForm, result);
 		if(result.hasErrors()) {
 			return "modification-client";
 		}

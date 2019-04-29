@@ -26,8 +26,8 @@
 Dans le *workspace* :
 
 ```bash
-git clone -b tp1 ssh://git@git.stable.innovation.insee.eu:22222/wehdrc/formation-spring-mvc-v2.git
-cd formation-spring-mvc
+git clone ssh://git@git.stable.innovation.insee.eu:22222/wehdrc/formation-spring-mvc-v2.git
+cd formation-spring-mvc-v2
 ```
 
 ### Importer le projet dans Eclipse
@@ -37,20 +37,20 @@ cd formation-spring-mvc
 * File
 * Import…
 * Existing Maven Project
-* Root directory : D:\idep\Mes Documents\eclipse_workspace\formation-spring-mvc
+* Root directory : D:\<idep>\Mes Documents\eclipse_workspace\formation-spring-mvc-v2
 * Finish
 
-### Optimiser le processus développements
+### Optimiser les processus de développement
 
 Ajouter les « Spring dev-tools » :
 
 > pom.xml
 
-```
+```xml
 <dependency>
-	<groupId>org.springframework.boot</groupId>
-	<artifactId>spring-boot-devtools</artifactId>
-	<optional>true</optional>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <optional>true</optional>
 </dependency>
 ```
 
@@ -145,10 +145,10 @@ Ce contrôleur possède une méthode qui est appelée à l’URL « /clients �
 Il récupère la liste de tous les clients dans la base de donnée et l’ajoute au modèle.
 
 ```java
-	@Autowired
-	private ClientRepository clientRepository;
-	…
-	List<Client> clients = clientDao.findAll();
+@Autowired
+private ClientRepository clientRepository;
+…
+List<Client> clients = clientDao.findAll();
 ```
 
 Il lance la génération de la vue `/views/clients.jsp`.
@@ -162,23 +162,23 @@ En itérant sur la liste des clients avec le tag `<c:forEach>`, afficher la list
 > Rappel : structure d’un tableau HTML
 
 ```html
-	<table>
-		<tr> <!-- Ligne entête -->
-			<th>Entête 1</th>
-			<th>Entête 2</th>
-			<th>Entête 3</th>
-		</tr>
-		<tr> <!-- Ligne 1 -->
-			<td>Cellule 1.1</td>
-			<td>Cellule 1.2</td>
-			<td>Cellule 1.3</td>
-		</tr>
-		<tr> <!-- Ligne 2 -->
-			<td>Cellule 2.1</td>
-			<td>Cellule 2.2</td>
-			<td>Cellule 2.3</td>
-		</tr>
-	</table>
+<table>
+    <tr> <!-- Ligne entête -->
+        <th>Entête 1</th>
+        <th>Entête 2</th>
+        <th>Entête 3</th>
+    </tr>
+    <tr> <!-- Ligne 1 -->
+        <td>Cellule 1.1</td>
+        <td>Cellule 1.2</td>
+        <td>Cellule 1.3</td>
+    </tr>
+    <tr> <!-- Ligne 2 -->
+        <td>Cellule 2.1</td>
+        <td>Cellule 2.2</td>
+        <td>Cellule 2.3</td>
+    </tr>
+</table>
 ```
 
 #### Ajouter un lien vers la page d’accueil
@@ -202,7 +202,7 @@ Ce contrôleur possède une méthode qui est appelée à l’URL « /client/{id
 À l’aide de l’annotation `@PathVariable`, récupérer la valeur de l’identifiant passé dans l’URL.
 Dans la base, récupérer le client associé à cet identifiant.
 Ajouter le client au modèle.
-Diriger vers la page `/views/client.jsp`.
+Diriger vers la page `client.jsp`.
 
 #### Créer la page client.jsp
 
@@ -330,7 +330,6 @@ Puis lancer l’application et tester la navigation.
 git add .
 git commit -m "TP3 <idep>"
 git checkout -b solution-tp3 origin/solution-tp3
-git pull
 ```
 
 ## 4. Formulaires
@@ -376,7 +375,7 @@ Le formulaire possède les éléments suivants :
  - un champ de texte pour la date de naissance au format *jj/mm/aaaa* ;
  - un bouton « Enregistrer » qui poste les données du formulaire vers le serveur (`<button type="submit">`).
 
-![Formulaire nouveau client](docs/images/formulaire-modification-client.png)
+![Formulaire modification client](docs/images/formulaire-modification-client.png)
 
 #### Enregistrer les modifications en base de données
 
@@ -402,7 +401,7 @@ return "redirect:/client/{id}"
 > ModificationClientController.java
 
 Ajouter un paramètre de type `RedirectAttributes` au contrôleur associé à la requête `POST /client/{id}/modification`.
-Lui ajouter un *flashAttribute* nommé `"modification"` et valant `true` de manière à pouvoir y accéder après la redirection.
+Lui ajouter un *flashAttribute* nommé `"modification"` et valant `true` qui sera disponible après la redirection.
 
 > client.jsp
 
@@ -414,64 +413,26 @@ git commit -m "TP4 <idep>"
 git checkout solution-tp4
 ```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 5. Validation
 
 ```bash
-git checkout tp5-enonce
-git pull
+git checkout -b tp5 origin/tp5
 ```
 
 ### 5.1. Validation élémentaire des objets de la classe `Client`
 
-#### 5.1.1. Ajouter les dépendances nécessaires
-
-> pom.xml
-
-```xml
-<dependency>
-    <groupId>javax.validation</groupId>
-    <artifactId>validation-api</artifactId>
-    <version>1.1.0.Final</version>
-</dependency>
-<dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-validator</artifactId>
-    <version>5.3.1.Final</version>
-</dependency>
-```
-
-#### 5.1.2. Annoter la classe `Client`
+#### Annoter la classe `Client`
 
 > Client.java
 
 Les règles sont les suivantes :
  * l’identifiant doit être positif,
- * la taille du nom doit être compris entre 5 et 30 caractères,
+ * la taille du nom doit être compris entre 5 et 50 caractères,
  * l’email doit correspondre au patron suivant :  `[-_a-z0-9.]+@[-_a-z0-9]+\.[a-z]{2,4}`,
  * le titre doit être non nul,
- * la date doit être non nulle et située dans le passé.
+ * la date doit être non nulle et être antérieure à la date courante.
 
-#### 5.1.3. Valider l’objet client dans le contrôleur de modification d’un client
+#### Valider l’objet client dans le contrôleur de modification d’un client
 
 > ModificationClientController.java
 
@@ -480,62 +441,59 @@ Stocker le résultat de cette validation dans un objet de type `BindingResult`.
 Si l’objet n’est pas valide, renvoyer vers le formulaire de modification d’un client.
 Le formulaire devra être rempli avec les dernières données saisies par l’utilisateur.
 
-#### 5.1.4. Afficher les éventuelles erreurs de validation
+#### Afficher les éventuelles erreurs de validation
 
 > modification-client.jsp
 
-Sous chaque champ du formulaire, ajouter la balise `<form:errors>` appropriée.
-On pourra utiliser l’attribut `cssClass="error"` pour avoir mieux voir les messages d’erreurs.
+À côté de chaque champ du formulaire, ajouter la balise `<form:errors>` appropriée.
+On pourra utiliser l’attribut `cssClass="error"` pour afficher les messages d’erreurs en rouge.
 Faire quelques tests pour vérifier que la validation fonctionne comme souhaité.
 Essayer par exemple avec une date dont le format n’est pas bon.
 
-#### 5.1.5. Personaliser les messages d’erreurs de validation
+#### Personnaliser les messages d’erreurs de validation
 
-> dispatcher-servlet.xml
+> SpringMvcConfiguration.java
 
 Ajouter une source de message internationalisée :
 
-```xml
-<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
-    <property name="basenames">
-        <list>
-            <value>message</value>
-        </list>
-   </property>
-    <property name="defaultEncoding" value="UTF-8" />
-</bean>
+```java
+@Bean
+public MessageSource messageSource() {
+    ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+    messageSource.setBasename("classpath:messages");
+    messageSource.setDefaultEncoding("UTF-8");
+    return messageSource;
+}
 ```
 
 Déclarer cette source de message auprès d’un validateur :
 
-```xml
-<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
-    <property name="validationMessageSource" ref="messageSource"/>
-</bean>
-```
-
-Déclarer le validateur auprès de Spring MVC :
-
-```xml
-<mvc:annotation-driven conversion-service="conversionService" validator="validator">
+```java
+@Bean
+public LocalValidatorFactoryBean getValidator() {
+    LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+    bean.setValidationMessageSource(messageSource());
+    return bean;
+}
 ```
 
 > message_fr.properties
 
-En suivant les règles de nommage des clés, écrire des messages pour chaque erreur de validation possible.
-Par exemple :
+Ajouter des attributs de type `message = "…"` dans les annotations de validation de la classe `Client`.
+Ajouter les propriétés correspondantes dans le fichier `messages_fr.properties`
 
-```properties
-NotNull.client.titre=Choisir un titre
-```
 
 :exclamation: Ne pas oublier le message d’erreur de conversion de la date.
 
+```properties
+typeMismatch.client.dateNaissance=…
+```
+
 Tester.
 
-### 5.2. Vérifier que l’email du client n’est pas déjà utilisé
+### Vérifier que l’email du client n’est pas déjà utilisé
 
-#### 5.2.1. Créer un validateur qui vérifie l’unicité de l’email
+#### Créer un validateur qui vérifie l’unicité de l’email
 
 > ClientValidator.java
 
@@ -543,21 +501,16 @@ Utiliser la fonction `ClientService.emailDejaUtilise` pour faire le contrôle.
 En cas d’erreur, le message à afficher est défini par sa clé dans le fichier message_fr.properties.
 Pour cela, utiliser la fonction`Errors.rejectValue(String field, String errorCode)` et ajouter une ligne correspondant à `errorCode` dans le fichier de messages.
 
-#### 5.2.2. Utiliser le nouveau validateur dans le contrôleur
+#### Utiliser le nouveau validateur dans le contrôleur
 
 > ModificationClientController.java
 
 Injecter le validator dans le contrôleur grâce à l’annotation `@Autowired`.
 
-### 5.3. Ajouter les contrôles au formulaire de création d’un nouveau client.
-
-> nouveau-client.jsp, NouveauClientController.java
-
 ```bash
 git add .
 git commit -m "TP5 <idep>"
-git checkout tp5-correction
-git pull
+git checkout -b solution-tp5 origin/tp5-correction
 ```
 
 ## 6. Ajax

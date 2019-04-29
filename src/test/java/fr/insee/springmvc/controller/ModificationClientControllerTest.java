@@ -48,12 +48,41 @@ public class ModificationClientControllerTest {
 		mockMvc.perform(post("/client/106/modification")
 				.param("id", "106")
 				.param("nom", "to_nom")
-				.param("email", "toEmail")
+				.param("email", "email@valid.fr")
 				.param("titre", "M")
 				.param("dateNaissance", "21/04/1984"))
 			.andExpect(status().isFound())
 			.andExpect(flash().attributeExists("modification"))
 			.andExpect(flash().attribute("modification", true))
 			.andExpect(redirectedUrl("/client/106"));
+	}
+
+	@Test
+	public void erreurNomTropCourtEmailInvalideDateInvalide() throws Exception {
+		mockMvc.perform(post("/client/106/modification")
+				.param("id", "106")
+				.param("nom", "az")
+				.param("email", "email")
+				.param("titre", "MME")
+				.param("dateNaissance", "azerty"))
+			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
+			.andExpect(model().errorCount(3))
+			.andExpect(model().attributeHasFieldErrors("client", "nom", "email", "dateNaissance"))
+            .andExpect(forwardedUrl("/WEB-INF/views/modification-client.jsp"));
+	}
+
+	@Test
+	public void erreurEmailDejaUtiliseDateFuture() throws Exception {
+		mockMvc.perform(post("/client/106/modification")
+				.param("id", "106")
+				.param("nom", "nom valide")
+				.param("email", "pjohnson4@ovh.net")
+				.param("titre", "M")
+				.param("dateNaissance", "10/11/2199"))
+			.andExpect(status().isOk())
+			.andExpect(model().hasErrors())
+			.andExpect(model().errorCount(2))
+            .andExpect(forwardedUrl("/WEB-INF/views/modification-client.jsp"));
 	}
 }
