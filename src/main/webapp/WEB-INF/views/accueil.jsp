@@ -18,6 +18,7 @@
 		</p>
 		<ul>
 			<li><a href="<c:url value="/clients" />">Liste des clients</a></li>
+			<li><a href="http://localhost:3000">Passer une commande</a></li>
 		</ul>
 	</section>
 	<footer id="footer">
