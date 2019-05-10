@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cocktails")
 @DynamicUpdate
@@ -29,6 +31,7 @@ public class Cocktail {
 	private String nom;
 
 	@Column(name = "norm")
+	@JsonIgnore
 	private String nomNorm;
 
 	@Column(name = "prix")

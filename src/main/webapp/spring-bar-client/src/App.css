@@ -1,33 +1,94 @@
-.App {
-  text-align: center;
+html {
+	font-family: Arial;
+	font-size: 16px;
+	margin: 20px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+	font-size: 22px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+table {
+	border-collapse: collapse;
 }
 
-.App-link {
-  color: #61dafb;
+td, th {
+	border: solid black 1px;
+	padding: 5px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+select[multiple='multiple'] {
+	display: block;
+	width: 400px;
+	margin: 10px 0;
+}
+
+.search-results {
+  width: 206px;
+  border-top: none;
+}
+
+select, input[type='text'] {
+	border-radius: 3px;
+	border: solid black 1px;
+	font-size: 100%;
+	padding: 1px 4px;
+}
+
+button.link {
+  border: 0;
+	background: none;
+	box-shadow:none;
+	border-radius: 2;
+	margin-top: 0;
+	margin-left: 0;
+	padding: 2px;
+	border: none;
+  font-size: 16px;
+  width: 100%;
+}
+
+button {
+	border: 0;
+	background: none;
+	box-shadow:none;
+	border-radius: 5px;
+	margin-top: 20px;
+	margin-left: 0;
+	padding: 5px;
+	border: solid black 2px;
+	font-weight: bold;
+	font-size: 16px;
+	width: 120px;
+}
+
+button:hover {
+	background-color: black;
+	color: white;
+}
+
+
+#header {
+	display: table-row;
+}
+
+#header img {
+	width: 150px;
+	height: auto;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+#header h1 {
+	display: table-cell;
+	padding-left: 20px;
+	font-family: cursive;
+	vertical-align: middle;
+	font-size: 30px;
+	color: #dd5566;
+}
+
+#footer {
+	margin-top: 30px;
+	font-size: 75%;
 }
